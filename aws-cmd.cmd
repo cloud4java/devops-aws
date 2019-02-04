@@ -7,3 +7,4 @@ aws ec2 create-key-pair --key-name lamp2Key --output text
 chmod 600 /home/dorival/.ssh/lamp2Key.pem
 aws ec2 run-instances --image-id --instance-type t2-micro --key-name lamp2Key --security-group-ids sg-0a58c5622bcaa02cb
 aws ec2 describe-instance-status --instance-id i-123
+Sessao 3 aula 10
