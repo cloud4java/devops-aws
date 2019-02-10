@@ -8,3 +8,4 @@ sg.SecurityGroupIngress = [ec2.SecurityGroupRule(IpProtocol = "tcp", FromPort=88
 t.add_resource(sg)
 print(t.to_json())
 #AmiID
+#AmiID
