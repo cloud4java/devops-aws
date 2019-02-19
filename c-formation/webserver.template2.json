@@ -1,0 +1,81 @@
+{
+    "Outputs": {
+        "InstanceAccess": {
+            "Description": "Command to use to access the instance using SSH",
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "ssh -i ~/.ssh/lamp2Key.pem ec2-user@",
+                        {
+                            "Fn::GetAtt": [
+                                "Webserver",
+                                "PublicDnsName"
+                            ]
+                        }
+                    ]
+                ]
+            }
+        },
+        "WebUrl": {
+            "Description": "The url of the server",
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "http://",
+                        {
+                            "Fn::GetAtt": [
+                                "Webserver",
+                                "PublicDnsName"
+                            ]
+                        }
+                    ]
+                ]
+            }
+        }
+    },
+    "Parameters": {
+        "KeyName": {
+            "Description": "Name of the ssh keky pair that will be used to access the instance",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "LampSg": {
+            "Properties": {
+                "GroupDescription": "Allow access throught ports 80 and 22",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "Webserver": {
+            "Properties": {
+                "ImageId": "ami-0cc848dfaa82172af",
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "SecurityGroups": [
+                    {
+                        "Ref": "LampSg"
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        }
+    }
+}

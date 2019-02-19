@@ -31,7 +31,7 @@ ud = Base64(Join('\n',
 		"sudo chkconfig httpd on"
 	]))
 
-instance.UserData = ud
+#instance.UserData = ud
 t.add_resource(instance)
 
 t.add_output(Output(
