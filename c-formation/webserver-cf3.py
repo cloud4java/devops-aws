@@ -47,6 +47,21 @@ t.add_output(Output(
 )
 
 
+#template.add_mapping('RegionMap', {
+#    "us-east-1":      {"AMI": "ami-7f418316"},
+#    "us-west-1":      {"AMI": "ami-951945d0"},
+#    "us-west-2":      {"AMI": "ami-16fd7026"},
+#    "eu-west-1":      {"AMI": "ami-24506250"},
+#    "sa-east-1":      {"AMI": "ami-3e3be423"},
+#    "ap-southeast-1": {"AMI": "ami-74dda626"},
+#    "ap-northeast-1": {"AMI": "ami-dcfa4edd"}
+#})
+
+t.add_mapping('RegionMap', {
+    "us-east-1":      {"AMI": "ami-0cc848dfaa82172af"}
+})
+
 print(t.to_json())
+https://aws.amazon.com/pt/blogs/mt/using-aws-cloud9-aws-codecommit-and-troposphere-to-author-aws-cloudformation-templates/
 #AmiID=ami-0cc848dfaa82172af
 #AmiID
