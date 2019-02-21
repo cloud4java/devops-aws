@@ -62,6 +62,6 @@ t.add_mapping('RegionMap', {
 })
 
 print(t.to_json())
-https://aws.amazon.com/pt/blogs/mt/using-aws-cloud9-aws-codecommit-and-troposphere-to-author-aws-cloudformation-templates/
+#https://aws.amazon.com/pt/blogs/mt/using-aws-cloud9-aws-codecommit-and-troposphere-to-author-aws-cloudformation-templates/
 #AmiID=ami-0cc848dfaa82172af
 #AmiID
