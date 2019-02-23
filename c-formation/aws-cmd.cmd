@@ -20,6 +20,6 @@ aws ec2 describe-instances --instance-ids i-0551450c19accdd6a --output text
 aws ec2 terminate-instances --instance-ids i-0551450c19accdd6a
 
 
-aws cloudformation deploy --template-file /path_to_template/template.json --stack-name my-new-stack --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
+#aws cloudformation deploy --template-file /path_to_template/template.json --stack-name my-new-stack --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
 
-aws cloudformation deploy --template-file cf1.json --stack-name lamp-stack
+#aws cloudformation deploy --template-file cf1.json --stack-name lamp-stack 
