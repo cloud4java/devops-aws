@@ -19,7 +19,17 @@ ssh -i /home/dorival/.ssh/lamp2Key.pem ec2-user@ec2-54-183-148-69.us-west-1.comp
 aws ec2 describe-instances --instance-ids i-0551450c19accdd6a --output text
 aws ec2 terminate-instances --instance-ids i-0551450c19accdd6a
 
+#Begin create stack
+aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf1.json --parameters file://params.json
 
-#aws cloudformation deploy --template-file /path_to_template/template.json --stack-name my-new-stack --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
+[
+{"ParameterKey": "KeyName",
+"ParameterValue":"lamp2Key"
+},
+{"ParameterKey": "t2.micro",
+"ParameterValue":"instances"
+}
+]
+#End create stack
 
-#aws cloudformation deploy --template-file cf1.json --stack-name lamp-stack 
+
