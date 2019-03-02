@@ -1,9 +1,3 @@
- 
-PWD=/etc/ansible
-EC2_INI_PATH=/etc/ansible/ec2.ini
-ANSIBLE_HOSTS=/etc/ansible/ec2.py
-
-
  export AWS_ACCES_KEY_ID='xxxxx'
  export AWS_SECRET_ACCESS_KEY='asxxxsa'
  cd /etc/ansible/
@@ -16,4 +10,4 @@ ANSIBLE_HOSTS=/etc/ansible/ec2.py
  export EC2_INI_PATH=/etc/ansible/ec2.ini
  export ANSIBLE_HOSTS=/etc/ansible/ec2.py 
  #class 20 - running first ansible command
-
+ 
