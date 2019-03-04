@@ -1,0 +1,22 @@
+---
+# tasks file for apache
+
+- name: "loop through list"
+  debug:
+    msg: "An item: {{item}}"
+  with_items:
+    - Dorival
+    - Marlene Silva
+    - Rafael Mattos
+
+- name: Ensure the httpd is not installed
+  yum:
+    name: httpd
+    #state: absent
+    state: present
+- name: Enxure that httpd-tools is not installed
+  yum: 
+    name: httpd-tools
+    #state: absent
+    state: present
+

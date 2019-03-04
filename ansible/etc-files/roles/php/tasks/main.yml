@@ -1,0 +1,35 @@
+---
+# tasks file for php
+- name: "loop through list"
+  debug:
+    msg: "An item: {{item}}"
+  with_items:
+    - 1
+    - 2
+    - 3
+
+- name: Install PHP 7 with the most common packages
+    #name: ['php', 'php-gd', 'php-mbstring', 'php-mysqlnd', 'php-opcache', 'php-pdo', 'php-pecl-apcu']
+    #name: ['php70', 'php70-gd', 'php70-imap', 'php70-mbstring', 'php70-mysqlnd', 'php70-opcache', 'php70-pdo', 'php70-pecl-apcu']
+  yum:  name = {{ item }} state = present
+  with_items:
+   - httpd
+   - php
+   - php-mysql
+   - git
+
+- name: Upload index.php file to the remote web directory
+  copy:
+    src: index.php
+    dest: /var/www/html
+    owner: ec2-user
+    group: ec2-user
+
+  notify: restart Apache 
+#- name: restart Apache
+
+- name: httpd service state
+  service: name=httpd state=started enabled=yes
+    #name: httpd
+    #state: started
+    #enabled: yes
