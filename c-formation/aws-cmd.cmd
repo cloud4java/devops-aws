@@ -55,4 +55,8 @@ ansible all -a "bash --version"
 #cd lamp/
 ansible-playbook lamp.yml 
 
+ansible --become -m yum -a "name=git  state=installed" all 
+ansible --become -m yum -a "name=python state=present" all
+
+
 
