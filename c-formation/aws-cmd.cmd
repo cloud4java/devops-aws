@@ -58,5 +58,10 @@ ansible-playbook lamp.yml
 ansible --become -m yum -a "name=git  state=installed" all 
 ansible --become -m yum -a "name=python state=present" all
 
+ansible -m cron -a 'name=ansible-pull minute="*/5" job="/usr/bin/ansible-pull -U https://github.com/cloud4java/devops-aws"' all
+
+#https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
+
+
 
 
