@@ -2,9 +2,8 @@
     - hosts: all
       become: yes
       roles:
-        #- php
-        #- apache
+        - php
+        - apache
         - jenkins
-
-
+        - { role: tecris.maven, maven_major: 3, maven_version: 3.6.0, maven_home_parent_directory: /opt }
   
