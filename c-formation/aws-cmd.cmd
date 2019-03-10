@@ -28,16 +28,17 @@ aws ec2 terminate-instances --instance-ids i-0551450c19accdd6a
 
 #Begin create stack
 aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf1.json --parameters file://params.json
+aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf-jenkins.json --parameters file://jenkins.param
 
-[
-{"ParameterKey": "KeyName",
-"ParameterValue":"lamp2Key"
-},
-{"ParameterKey": "t2.micro",
-"ParameterValue":"instances"
-}
-]
+[{"ParameterKey": "KeyName", "ParameterValue":"lamp2Key"}, {"ParameterKey": "t2.micro", "ParameterValue":"instances"} ] 
 #End create stack
+
+aws cloudformation list-stacks
+
+#
+#aws cloudformation create-stack --stack-name jenkins --template-body file://cf-jenkins.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=InstanceType,ParameterValue=t2.micro
+
+aws cloudformation delete-stack --stack-name jenkins
 
 ############ Ansible commands #####################
 ansible --private-key=~/.ssh/lamp2Key.pem --user=ec2-user -m ping all
@@ -62,6 +63,7 @@ ansible -m cron -a 'name=ansible-pull minute="*/5" job="/usr/bin/ansible-pull -U
 
 #https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
 
-
+# install role for maven
+ansible-galaxy install tecris.maven,17.10.28 # specific version
 
 

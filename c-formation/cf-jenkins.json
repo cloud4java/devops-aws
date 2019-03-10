@@ -1,0 +1,81 @@
+{
+    "Mappings": {
+        "RegionMap": {
+            "ap-northeast-1": {
+                "AMI": "ami-dcfa4edd"
+            },
+            "ap-southeast-1": {
+                "AMI": "ami-74dda626"
+            },
+            "eu-west-1": {
+                "AMI": "ami-24506250"
+            },
+            "sa-east-1": {
+                "AMI": "ami-3e3be423"
+            },
+            "us-east-1": {
+                "AMI": "ami-09bfcadb25ee95bec"
+            },
+            "us-west-1": {
+                "AMI": "ami-09bfcadb25ee95bec"
+            },
+            "us-west-2": {
+                "AMI": "ami-16fd7026"
+            }
+        }
+    },
+    "Parameters": {
+        "KeyName": {
+            "Description": "Name of the ssh keky pair that will be used to access the instance",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "Ec2Instance": {
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMI"
+                    ]
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "SecurityGroups": [
+                    {
+                        "Ref": "LampSg"
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": "80"
+                }
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "LampSg": {
+            "Properties": {
+                "GroupDescription": "Allow access through ports 80 and 22",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        }
+    }
+}
