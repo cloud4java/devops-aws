@@ -67,3 +67,5 @@ ansible -m cron -a 'name=ansible-pull minute="*/5" job="/usr/bin/ansible-pull -U
 ansible-galaxy install tecris.maven,17.10.28 # specific version
 
 
+#awacs
+sudo pip install awacs

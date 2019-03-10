@@ -1,0 +1,136 @@
+{
+    "Mappings": {
+        "RegionMap": {
+            "ap-northeast-1": {
+                "AMI": "ami-dcfa4edd"
+            },
+            "ap-southeast-1": {
+                "AMI": "ami-74dda626"
+            },
+            "eu-west-1": {
+                "AMI": "ami-24506250"
+            },
+            "sa-east-1": {
+                "AMI": "ami-3e3be423"
+            },
+            "us-east-1": {
+                "AMI": "ami-09bfcadb25ee95bec"
+            },
+            "us-west-1": {
+                "AMI": "ami-09bfcadb25ee95bec"
+            },
+            "us-west-2": {
+                "AMI": "ami-16fd7026"
+            }
+        }
+    },
+    "Parameters": {
+        "KeyName": {
+            "Description": "Name of the ssh keky pair that will be used to access the instance",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "InstanceProfile": {
+            "Properties": {
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "Role"
+                    }
+                ]
+            },
+            "Type": "AWS::IAM::InstanceProfile"
+        },
+        "LampSg": {
+            "Properties": {
+                "GroupDescription": "Allow access through ports 80 and 22",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "LampStage": {
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMI"
+                    ]
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "SecurityGroups": [
+                    {
+                        "Ref": "LampSg"
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": "80"
+                }
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "Policy": {
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "s3:*"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": [
+                                "*"
+                            ]
+                        }
+                    ]
+                },
+                "PolicyName": "AllowS3",
+                "Roles": [
+                    {
+                        "Ref": "Role"
+                    }
+                ]
+            },
+            "Type": "AWS::IAM::Policy"
+        },
+        "Role": {
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "sts:AssumeRole"
+                            ],
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "Type": "AWS::IAM::Role"
+        }
+    }
+}
