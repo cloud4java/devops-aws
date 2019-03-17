@@ -19,6 +19,6 @@
   service:
     name: codedeploy-agent
     state: started
-    anabled: yes
+    #anabled: yes
 
     

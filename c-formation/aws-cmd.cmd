@@ -67,5 +67,12 @@ ansible -m cron -a 'name=ansible-pull minute="*/5" job="/usr/bin/ansible-pull -U
 ansible-galaxy install tecris.maven,17.10.28 # specific version
 
 
+aws cloudformation create-stack --capabilities CAPABILITY_IAM --stack-name lamp-staging --template-body file://lamp-stage.json --parameter ParameterKey=KeyName,ParameterValue=lamp2Key
+
 #awacs
 sudo pip install awacs
+
+#create role
+aws iam create-role --role-name CodeDeployServiceRole --assume-role-policy-document file://policy.txt
+#attach role
+aws iam attach-role-policy --role-name CodeDeployServiceRole --policy-arn arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole

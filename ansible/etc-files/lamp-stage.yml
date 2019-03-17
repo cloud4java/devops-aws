@@ -1,7 +1,8 @@
 ---
-- hosts: 13.56.150.229
+#- hosts: 13.56.150.229
+- hosts: [lampStaging]
   become: yes
   roles:
-      #- php
+      - apache
       - codedeploy
       - { role: tecris.maven, maven_major: 3, maven_version: 3.6.0, maven_home_parent_directory: /opt }

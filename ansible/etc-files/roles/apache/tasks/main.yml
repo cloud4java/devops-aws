@@ -19,4 +19,6 @@
     name: httpd-tools
     #state: absent
     state: present
+- name: Assure httpd is started
+  service: name=httpd state=started enabled=yes
 
