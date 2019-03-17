@@ -43,6 +43,11 @@
       state: started
       enabled: yes
 
+- name: Set ec2-user owner of jenkins
+  become: yes
+  #command: chown ec2-user /var/lib/jenkins/ -R | chown jenkins /var/lib/jenkins/ -R
+  command: chown jenkins /var/lib/jenkins/ -R
+
 #- name: Install maven
 #  become: yes
 #  #apt: pkg=maven state=latest update_cache=yes cache_valid_time=3600
