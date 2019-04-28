@@ -64,6 +64,9 @@
         },
         "LampStage": {
             "Properties": {
+                "IamInstanceProfile": {
+                    "Ref": "InstanceProfile"
+                },
                 "ImageId": {
                     "Fn::FindInMap": [
                         "RegionMap",

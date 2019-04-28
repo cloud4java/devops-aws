@@ -27,8 +27,10 @@ aws ec2 describe-instances --instance-ids i-0551450c19accdd6a --output text
 aws ec2 terminate-instances --instance-ids i-0551450c19accdd6a
 
 #Begin create stack
-aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf1.json --parameters file://params.json
-aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf-jenkins.json --parameters file://jenkins.param
+#aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf1.json --parameters file://params.json
+#aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf-jenkins.json --parameters file://jenkins.param
+
+aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf-jenkins.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=InstanceType,ParameterValue=t2.micro
 
 [{"ParameterKey": "KeyName", "ParameterValue":"lamp2Key"}, {"ParameterKey": "t2.micro", "ParameterValue":"instances"} ] 
 #End create stack
