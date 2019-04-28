@@ -30,7 +30,7 @@ aws ec2 terminate-instances --instance-ids i-0551450c19accdd6a
 #aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf1.json --parameters file://params.json
 #aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf-jenkins.json --parameters file://jenkins.param
 
-aws cloudformation create-stack --stack-name lamp-stack --template-body file://cf-jenkins.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=InstanceType,ParameterValue=t2.micro
+aws cloudformation create-stack --stack-name jenkins --template-body file://cf-jenkins.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key
 
 [{"ParameterKey": "KeyName", "ParameterValue":"lamp2Key"}, {"ParameterKey": "t2.micro", "ParameterValue":"instances"} ] 
 #End create stack
@@ -78,3 +78,6 @@ sudo pip install awacs
 aws iam create-role --role-name CodeDeployServiceRole --assume-role-policy-document file://policy.txt
 #attach role
 aws iam attach-role-policy --role-name CodeDeployServiceRole --policy-arn arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
+
+#Wordpress
+aws cloudformation create-stack --stack-name wordpress --template-body file://wordpress.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=SubnetId,ParameterValue=subnet-58b78a03
