@@ -6,8 +6,8 @@
         "InstanceType": {
             "Type": "String",
             "Description": "Instance type",
-            "Default": "t2.micro",
-            "AllowedValues": [ "t2.micro"]
+            "Default": "t2.medium",
+            "AllowedValues": [ "t2.medium", "t2.large" ]
         },
         "SubnetId": {
             "Type": "AWS::EC2::Subnet::Id",
@@ -21,13 +21,12 @@
 
     "Mappings": {
         "Images": {
-            "us-west-1": { "Value": "ami-09bfcadb25ee95bec" },
-            "us-west-1": { "Value": "ami-09bfcadb25ee95bec" },
-            "us-west-1": { "Value": "ami-09bfcadb25ee95bec" }
-        
+            "us-east-1": { "Value": "ami-12663b7a" },
+            "us-west-1": { "Value": "ami-a540a5e1" },
+            "us-west-2": { "Value": "ami-4dbf9e7d" }
         }
     },
-#// aws cloudformation create-stack --stack-name wordpress --template-body file://wordpress.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key, ParameterKey=SubnetId,ParameterValue=lamp2Key
+//aws cloudformation create-stack --stack-name wordpress --template-body file://wordpress.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=SubnetId,ParameterValue=subnet-58b78a03
 
     "Resources": {
         "WebServer0": {

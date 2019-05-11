@@ -36,7 +36,7 @@ aws cloudformation create-stack --stack-name jenkins --template-body file://cf-j
 #End create stack
 
 aws cloudformation list-stacks
-
+aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
 #
 #aws cloudformation create-stack --stack-name jenkins --template-body file://cf-jenkins.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=InstanceType,ParameterValue=t2.micro
 
@@ -81,3 +81,4 @@ aws iam attach-role-policy --role-name CodeDeployServiceRole --policy-arn arn:aw
 
 #Wordpress
 aws cloudformation create-stack --stack-name wordpress --template-body file://wordpress.json --parameters ParameterKey=KeyName,ParameterValue=lamp2Key ParameterKey=SubnetId,ParameterValue=subnet-58b78a03
+
